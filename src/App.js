@@ -7,7 +7,7 @@ const App = () => {
         <Fragment>
             <Header />
             <div className="container mt-5">
-                <div className="row justify-content-center">
+                <div className="row">
                     <Form />
                 </div>
             </div>
