@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { CategoriesContext } from '../context/CategoriesContext';
 
 const Form = () => {
-    const { hi } = useContext(CategoriesContext);
-    console.log(hi);
+
+    const { categories } = useContext(CategoriesContext);
+    console.log(categories);
+
     return (
         <form className="col-12">
             <fieldset className="text-center">
@@ -24,6 +26,7 @@ const Form = () => {
             </div>
         </form>
     );
+
 }
 
 export default Form;
