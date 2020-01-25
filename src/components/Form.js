@@ -1,10 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CategoriesContext } from '../context/CategoriesContext';
 
 const Form = () => {
 
     const { categories } = useContext(CategoriesContext);
-    console.log(categories);
+
+    const [search, setSearch] = useState({
+        ingredient: '',
+        category: ''
+    });
+
+    const getFormData = event => {
+        setSearch({
+            ...search,
+            [event.target.name]: event.target.value
+        });
+    }
 
     return (
         <form className="col-12">
@@ -13,11 +24,14 @@ const Form = () => {
             </fieldset>
             <div className="row mt-4">
                 <div className="col-md-4">
-                    <input className="form-control" name="ingredient" type="text" placeholder="Buscar por ingrediente" />
+                    <input className="form-control" name="ingredient" type="text" placeholder="Buscar por ingrediente" onChange={getFormData} />
                 </div>
                 <div className="col-md-4">
-                    <select className="form-control" name="category">
+                    <select className="form-control" name="category" onChange={getFormData}>
                         <option value="">Busca por categoría</option>
+                        {categories.map(element => (
+                            <option key={element.strCategory} value={element.strCategory}>{element.strCategory}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="col-md-4">
