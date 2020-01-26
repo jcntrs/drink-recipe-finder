@@ -5,7 +5,7 @@ import { RecipesContext } from '../context/RecipesContext';
 const Form = () => {
 
     const { categories } = useContext(CategoriesContext);
-    const { setSearchRecipes } = useContext(RecipesContext);
+    const { setSearchRecipes, setConsult } = useContext(RecipesContext);
 
     const [search, setSearch] = useState({
         ingredient: '',
@@ -22,7 +22,8 @@ const Form = () => {
     return (
         <form className="col-12" onSubmit={event => {
             event.preventDefault();
-            setSearchRecipes(search)
+            setSearchRecipes(search);
+            setConsult(true);
         }}>
             <fieldset className="text-center">
                 <legend>Busca por Categoría o Ingredientes</legend>
