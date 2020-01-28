@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const RecipesContext = createContext();
 
-const RecipesProvider = (props) => {
+const RecipesProvider = props => {
 
     const [consult, setConsult] = useState(false);
     const [recipes, setRecipes] = useState([]);
@@ -28,6 +28,7 @@ const RecipesProvider = (props) => {
             {props.children}
         </RecipesContext.Provider>
     );
+
 }
 
 export default RecipesProvider;
