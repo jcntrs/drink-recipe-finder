@@ -41,7 +41,7 @@ const RecipeList = () => {
     }
 
     const { recipes } = useContext(RecipesContext);
-    const { setRecipeId } = useContext(ModalContext);
+    const { recipeDetail, setRecipeDetail, setRecipeId } = useContext(ModalContext);
 
     return (
         <div className="row mt-5">
@@ -63,10 +63,14 @@ const RecipeList = () => {
             )}
             <Modal open={open} onClose={() => {
                 setRecipeId(null);
+                setRecipeDetail({});
                 handleClose();
             }}>
                 <div className={classes.paper} style={modalStyle}>
-                    <h1>From Modal</h1>
+                    <h1>{recipeDetail.strDrink}</h1>
+                    <h3 className="mt-4">{recipeDetail.strDrink ? 'Instructions' : 'Loading...'}</h3>
+                    <p>{recipeDetail.strInstructions}</p>
+                    <img className="img-fluid my-4" src={recipeDetail.strDrinkThumb} />
                 </div>
             </Modal>
         </div>
