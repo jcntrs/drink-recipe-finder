@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { CategoriesContext } from '../context/CategoriesContext';
 import { RecipesContext } from '../context/RecipesContext';
+import Error from './Error';
 
 const Form = () => {
 
     const { categories } = useContext(CategoriesContext);
     const { setSearchRecipes, setConsult } = useContext(RecipesContext);
 
+    const [error, setError] = useState(false);
     const [search, setSearch] = useState({
         ingredient: '',
         category: ''
@@ -19,12 +21,19 @@ const Form = () => {
         });
     }
 
-    return (
-        <form className="col-12" onSubmit={event => {
-            event.preventDefault();
+    const handleSubmit = event => {
+        event.preventDefault();
+        if (search.ingredient.trim() === '' || search.category.trim() === '') {
+            setError(true);
+        } else {
+            setError(false);
             setSearchRecipes(search);
             setConsult(true);
-        }}>
+        }
+    }
+
+    return (
+        <form className="col-12" onSubmit={handleSubmit}>
             <fieldset className="text-center">
                 <legend>Busca por Categoría o Ingredientes</legend>
             </fieldset>
@@ -44,6 +53,7 @@ const Form = () => {
                     <input className="btn btn-block btn-primary" type="submit" value="Buscar recetas" />
                 </div>
             </div>
+            {error ? <Error message="Todos los campos son obligatorios."></Error> : null}
         </form>
     );
 

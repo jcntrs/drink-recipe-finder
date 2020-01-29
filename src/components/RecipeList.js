@@ -18,7 +18,7 @@ const getModalStyle = () => {
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: 400,
+        width: 450,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
@@ -42,6 +42,16 @@ const RecipeList = () => {
 
     const { recipes } = useContext(RecipesContext);
     const { recipeDetail, setRecipeDetail, setRecipeId } = useContext(ModalContext);
+
+    const showIngredients = detail => {
+        let ingredients = [];
+        for (let index = 1; index <= 15; index++) {
+            if (detail[`strIngredient${index}`]) {
+                ingredients.push(<li key={index}>{detail[`strIngredient${index}`]} - {detail[`strMeasure${index}`]}</li>);
+            }
+        }
+        return ingredients;
+    }
 
     return (
         <div className="row mt-5">
@@ -71,6 +81,8 @@ const RecipeList = () => {
                     <h3 className="mt-4">{recipeDetail.strDrink ? 'Instructions' : 'Loading...'}</h3>
                     <p>{recipeDetail.strInstructions}</p>
                     <img className="img-fluid my-4" src={recipeDetail.strDrinkThumb} />
+                    {recipeDetail.strDrink ? <h3>Ingredients</h3> : null}
+                    {showIngredients(recipeDetail)}
                 </div>
             </Modal>
         </div>
